@@ -1,0 +1,79 @@
+#include <stdio.h>
+// taking function to find all the drinks total bill.
+double calculateBill(int quantity, double price) {
+return quantity * price;
+}
+//Here we check the avaliable quantity of theselctive drinks.
+int checkAvailability(int availableQuantity, int requestedQuantity)
+{
+if (requestedQuantity > availableQuantity)
+{
+return availableQuantity;
+}
+else {
+return requestedQuantity;
+}
+}
+
+// Here we update the stock of selected drink after purchase which are avaliable
+void updateStock(int *availableQuantity, int purchasedQuantity)
+{
+*availableQuantity -= purchasedQuantity;
+}
+int main()
+{
+int cokeAvailable = 10, pepsiAvailable = 15, spriteAvailable = 15, sevenUpAvailable = 25;
+double cokePrice = 5.0, pepsiPrice = 7.0, spritePrice = 7.0, sevenUpPrice = 3.0;
+//available drinks
+printf("Welcome to the Vending Machine!\n\n");
+printf("Available Drinks:\n");
+printf("1. Coke (Price: $%.2lf, Available: %d)\n", cokePrice, cokeAvailable);
+printf("2. Pepsi (Price: $%.2lf, Available: %d)\n", pepsiPrice, pepsiAvailable);
+printf("3. Sprite (Price: $%.2lf, Available: %d)\n", spritePrice, spriteAvailable);
+printf("4. 7UP (Price: $%.2lf, Available: %d)\n", sevenUpPrice, sevenUpAvailable);
+
+int choice;
+printf("\nEnter the drink number you want to purchase (1-4): ");
+scanf("%d", &choice);
+int quantity;
+printf("Enter the quantity you want to buy: ");
+scanf("%d", &quantity);
+double totalBill = 0.0;
+// Process user input
+switch (choice) {
+case 1:
+quantity = checkAvailability(cokeAvailable, quantity);
+totalBill = calculateBill(quantity, cokePrice);
+updateStock(&cokeAvailable, quantity);
+printf("You have ordered %d Coke(s) for a total of $%.2lf.\n", quantity, totalBill);
+break;
+case 2:
+quantity = checkAvailability(pepsiAvailable, quantity);
+totalBill = calculateBill(quantity, pepsiPrice);
+updateStock(&pepsiAvailable, quantity);
+printf("You have ordered %d Pepsi(s) for a total of $%.2lf.\n", quantity, totalBill);
+break;
+case 3:
+quantity = checkAvailability(spriteAvailable, quantity);
+totalBill = calculateBill(quantity, spritePrice);
+updateStock(&spriteAvailable, quantity);
+printf("You have ordered %d Sprite(s) for a total of $%.2lf.\n", quantity, totalBill);
+break;
+
+case 4:
+quantity = checkAvailability(sevenUpAvailable, quantity);
+totalBill = calculateBill(quantity, sevenUpPrice);
+updateStock(&sevenUpAvailable, quantity);
+printf("You have ordered %d 7UP(s) for a total of $%.2lf.\n", quantity, totalBill);
+break;
+default:
+printf("Invalid drink choice.\n");
+}
+printf("\nAvailable Drinks:\n");
+printf("1. Coke (Price: $%.2lf, Available: %d)\n", cokePrice, cokeAvailable);
+printf("2. Pepsi (Price: $%.2lf, Available: %d)\n", pepsiPrice, pepsiAvailable);
+printf("3. Sprite (Price: $%.2lf, Available: %d)\n", spritePrice, spriteAvailable);
+printf("4. 7UP (Price: $%.2lf, Available: %d)\n", sevenUpPrice, sevenUpAvailable);
+printf("\nTotal Bill: $%.2lf\n", totalBill);
+return 0; //Here our program execute successfully
+}
